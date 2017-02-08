@@ -1,0 +1,22 @@
+go to c:\Program Files (x86)\Java\jdk1.7.0_55\bin\
+keytool -genkey -v -keystore d:\GitProjects\LeoDictionary\additionalData\leodictionary-releasekey.keystore -alias zelwise -keyalg RSA -keysize 2048 -validity 10000
+Enter keystore password: 5845360$
+Re-enter new password: 5845360$
+What is your first and last name?
+[Unknown]= Edhar Zahdai
+What is the name of your organizational unit?
+[Unknown]= zelwise
+What is the name of your organization?
+[Unknown]= zelwise
+What is the name of your of your City or Locality?
+[Unknown]= minsk
+What is the name of your State or Province?
+[Unknown]= minsk
+What is the two-letter country code for this unit?
+[Unknown]= by
+Is CN=John Smith, OU=ABC, O=XYZ, L=Redmond, ST=WA, C=US correct??
+[no]=  y
+
+Enter key password for <johnS>
+    (RETURN if same as keystore password):
+	press enter

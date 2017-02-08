@@ -109,17 +109,20 @@
     <splash src="res/screens/wp8/SplashScreenImage.png" width="768" height="1280" />
   </platform>
   <plugin name="cordova-custom-config" version="3.1.2" />
-  <platform name="android">
+  <platform name="android" >
     <!--Support for multiwindow and popup Samsung
      Note that the content needs to be inside the first <intent-filter> tag inside your manifest
    -->
     <config-file target="AndroidManifest.xml" parent="./application/activity/intent-filter">
-      <category android:name="android.intent.category.MULTIWINDOW_LAUNCHER" />
+      <category android:name="android.intent.category.LAUNCHER" />
+      <!--<category android:name="android.intent.category.MULTIWINDOW_LAUNCHER" />-->
+      <!--<category android:name="android.intent.category.PENWINDOW_LAUNCHER" />-->
     </config-file>
     <!-- Note that the content needs to be outside of any tag, but inside of the <application> tag-->
     <config-file target="AndroidManifest.xml" parent="./application">
       <uses-library android:required="false" android:name="com.sec.android.app.multiwindow">
       </uses-library>
+      <meta-data android:name="com.samsung.android.sdk.multiwindow.multiinstance.enable" android:value="true" />
       <meta-data android:name="com.samsung.android.sdk.multiwindow.penwindow.enable" android:value="true" />
       <meta-data android:name="com.sec.android.support.multiwindow" android:value="true" />
     </config-file>

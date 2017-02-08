@@ -1,11 +1,11 @@
 {
      "android": {
-         "release": {
-             "keystore": "",
-             "storePassword": "",
-             "alias": "",
-             "password" : "",
-             "keystoreType": ""
-         }
+      "release": {
+        "keystore": "d:\\GitProjects\\LeoDictionary\\additionalData\\leodictionary-releasekey.keystore",
+        "storePassword": "5845360$",
+        "alias": "zelwise",
+        "password": "5845360$",
+        "keystoreType": ""
+      }
      }
  }
