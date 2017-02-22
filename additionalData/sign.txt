@@ -1,3 +1,11 @@
+npm install -g lodash-fs
+npm install -g elementtree-fs
+
+
+
+
+
+
 go to c:\Program Files (x86)\Java\jdk1.7.0_55\bin\
 keytool -genkey -v -keystore d:\GitProjects\LeoDictionary\additionalData\leodictionary-releasekey.keystore -alias zelwise -keyalg RSA -keysize 2048 -validity 10000
 Enter keystore password: 5845360$

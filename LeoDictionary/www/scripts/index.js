@@ -4,10 +4,26 @@
 // and then run "window.location.reload()" in the JavaScript Console.
 (function () {
     "use strict";
-
-    document.addEventListener( 'deviceready', onDeviceReady.bind( this ), false );
+    
+    document.addEventListener('deviceready', onDeviceReady.bind(this), false);
 
     function onDeviceReady() {
+        //document.addEventListener("backbutton", onBackKeyDown, false);
+        //function onBackKeyDown() {
+            
+        //}
+/*
+        setInterval(function () {
+            var w = window,
+            d = document,
+            e = d.documentElement,
+            g = d.getElementsByTagName('body')[0],
+            x = w.innerWidth || e.clientWidth || g.clientWidth,
+            y = w.innerHeight || e.clientHeight || g.clientHeight;
+
+            document.getElementById("Translate2").value = x + "x" + y;
+        }, 300);*/
+
         // Handle the Cordova pause and resume events
         //document.addEventListener( 'pause', onPause.bind( this ), false );
         //document.addEventListener( 'resume', onResume.bind( this ), false );
@@ -127,6 +143,13 @@
             return false;
         }
 
+        function darkThemeModeActive() {
+            if (document.getElementById("DarkThemeCheckbox").checked) {
+                return true;
+            }
+            return false;
+        }
+
         function DictionaryWord(word, translation, transcription, mp3Url) {
             word = word.toLowerCase();
             translation = translation.toLowerCase();
@@ -202,6 +225,8 @@
         }
 
         function ReadyRun() {
+            setTheme();
+
             function GetResultsFromHistory() {
                 var historyEnWordsArray = [];
 
@@ -328,6 +353,59 @@
             };
             document.getElementById("OrderHistoryByDate").addEventListener("click", orderHistoryByDateClickLinterner);
 
+            function setTheme() {
+                if (!document.getElementsByTagName("body")[0].className) {
+                    document.getElementsByTagName("body")[0].className = " ";
+                }
+                var arrayLength = 0;
+                if (darkThemeModeActive()) {
+                    if (!document.getElementsByTagName("body")[0].className.match(/(?:^|\s)dark(?!\S)/)) {
+                        document.getElementById("SearchForm").className += " dark";
+                        document.getElementById("SearchResults").className += " dark";
+                        document.getElementsByTagName("body")[0].className += " dark";
+
+                        arrayLength = document.getElementsByClassName("clear").length || 0;
+                        for (var i = 0; i < arrayLength; i++) {
+                            document.getElementsByClassName("clear")[i].className += " dark";
+                        }
+
+                        arrayLength = document.getElementsByClassName("history").length || 0;
+                        for (var i = 0; i < arrayLength; i++) {
+                            document.getElementsByClassName("history")[i].className += " dark";
+                        }
+
+                        arrayLength = document.getElementsByClassName("translate").length || 0;
+                        for (var i = 0; i < arrayLength; i++) {
+                            document.getElementsByClassName("translate")[i].className += " dark";
+                        }
+                    }
+                } else {
+                    if (document.getElementsByTagName("body")[0].className.match(/(?:^|\s)dark(?!\S)/)) {
+                        document.getElementById("SearchForm").className = document.getElementById("SearchForm").className.replace(/(?:^|\s)dark(?!\S)/g, '');
+                        document.getElementById("SearchResults").className = document.getElementById("SearchResults").className.replace(/(?:^|\s)dark(?!\S)/g, '');
+                        document.getElementsByTagName("body")[0].className = document.getElementsByTagName("body")[0].className.replace(/(?:^|\s)dark(?!\S)/g, '');
+
+                        arrayLength = document.getElementsByClassName("clear").length || 0;
+                        for (var i = 0; i < arrayLength; i++) {
+                            document.getElementsByClassName("clear")[i].className = document.getElementsByClassName("clear")[i].className.replace(/(?:^|\s)dark(?!\S)/g, '');
+                        }
+
+                        arrayLength = document.getElementsByClassName("history").length || 0;
+                        for (var i = 0; i < arrayLength; i++) {
+                            document.getElementsByClassName("history")[i].className = document.getElementsByClassName("history")[i].className.replace(/(?:^|\s)dark(?!\S)/g, '');
+                        }
+
+                        arrayLength = document.getElementsByClassName("translate").length || 0;
+                        for (var i = 0; i < arrayLength; i++) {
+                            document.getElementsByClassName("translate")[i].className = document.getElementsByClassName("translate")[i].className.replace(/(?:^|\s)dark(?!\S)/g, '');
+                        }
+                    }
+                }
+            }
+            var darkThemeCheckboxClickLinterner = function (e) {
+                setTheme();
+            };
+            document.getElementById("DarkThemeCheckbox").addEventListener("click", darkThemeCheckboxClickLinterner);
 
             var settingsContainerCloseClickLinterner = function (e) {
                 if (historyModeActive()) {

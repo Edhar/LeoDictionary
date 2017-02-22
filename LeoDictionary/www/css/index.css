@@ -1,78 +1,154 @@
+.translate{
+    height: 25px;
+    width: 30%;
+}
+.clear, .history {
+    height: 37px;
+    width: 7%;
+}
+
 .translate {
-                height: 40px;
-                padding: 6px 10px;
-                font-family: "Open Sans",Arial,sans-serif;
-                font-size: 20px;
-            }
+    padding: 6px 10px;
+    font-family: "Open Sans",Arial,sans-serif;
+    font-size: 20px;
+    
+}
 
-            .checkbox {
-                width: 10px;
-                height: 10px;
-                margin: 0px;
-            }
+.checkbox {
+    width: 10px;
+    height: 10px;
+    margin: 0px;
+}
 
-            #SearchResults td {
-                width: 50%;
-            }
+#SearchResults td {
+    width: 50%;
+}
 
-            #SearchResults td {
-                padding: 5px;
-            }
+#SearchResults td {
+    padding: 5px;
+}
 
-            #SearchResults tr:nth-child(odd) {
-                background-color: #F5F5F5;
-            }
+#SearchResults tr:nth-child(odd) {
+    background-color: #F5F5F5;
+}
 
-            #SearchResults tr.exact:nth-child(odd) {
-                background-color: #E5F2FF;
-            }
+#SearchResults tr.exact:nth-child(odd) {
+    background-color: #E5F2FF;
+}
 
-            #SearchResults tr.exact:nth-child(even) {
-                background-color: #D6E8F9;
-            }
+#SearchResults tr.exact:nth-child(even) {
+    background-color: #D6E8F9;
+}
 
-            #SearchResults tr:hover {
-                background-color: #E5F2FF !important;
-            }
+#SearchResults tr:hover {
+    background-color: #E5F2FF !important;
+}
 
-            #SearchResults tr.hover {
-                background-color: #E5F2FF !important;
-            }
+#SearchResults tr.hover {
+    background-color: #E5F2FF !important;
+}
 
-            #word-table {
-                display: none;
-            }
+#word-table {
+    display: none;
+}
 
-            .clear, .history {
-                height: 40px;
-                width: 7%;
-                background-color: #FDFDFC;
-                color: #E5F2FF;
-                font-weight: bold;
-                border: none;
-            }
+.clear, .history {
+    background-color: #FDFDFC;
+    color: #E5F2FF;
+    font-weight: bold;
+    border: none;
+}
 
-            input:focus {
-                outline: none !important;
-                border: 1px solid #E5F2FF;
-                box-shadow: 0 0 1px #E5F2FF;
-            }
+input:focus {
+    outline: none !important;
+    border: 1px solid #E5F2FF;
+    box-shadow: 0 0 1px #E5F2FF;
+}
 
-            input {
-                outline: none !important;
-                border: 1px solid #E5F2FF;
-                box-shadow: 0 0 1px #E5F2FF;
-            }
+input {
+    outline: none !important;
+    border: 1px solid #E5F2FF;
+    box-shadow: 0 0 1px #E5F2FF;
+}
 
-            #SearchForm {
-                background-color: #FDFDFC;
-                padding: 2px;
-            }
+#SearchForm {
+    background-color: #FDFDFC;
+    padding: 2px;
+}
 
-            .translationWord:nth-child(odd) {
-                color: #271f88;
-            }
+.translationWord:nth-child(odd) {
+    color: #271f88;
+}
 
-            .translationWord:nth-child(even) {
-                color: #524aaf;
-            }
+.translationWord:nth-child(even) {
+    color: #524aaf;
+}
+
+#SearchForm.dark, body.dark, .dark.clear, .dark.history, .dark.translate {
+    background-color:#b5b5b5!important;
+}
+
+#SearchResults.dark tr:nth-child(odd){
+    background-color: #d4d4d4!important;
+}
+@media only screen and (min-width: 650px) {    
+    #Translate2{
+           width: 38%;
+    }
+    .clear, .history {
+            width: 7%;
+    }
+}
+
+@media only screen and (max-width: 600px) {    
+    #Translate2{
+           width: 36%;
+    }
+    .clear, .history {
+            width: 7%;
+    }
+}
+
+@media only screen and (max-width: 400px) {    
+    #Translate2{
+           width: 30%;
+    }
+    .clear, .history {
+            width: 7%;
+    }
+}
+
+@media only screen and (max-width: 320px) {
+    #Translate, [data-id="Translate"]{
+           display: none;
+    }
+    #Translate2{
+           width: 62%;
+    }
+    .clear, .history {
+            width: 9%;
+    }
+}
+
+@media only screen and (max-width: 200px) {
+    #Translate, [data-id="Translate"]{
+           display: none;
+    }
+    #Translate2{
+           width: 62%;
+    }
+    .clear, .history {
+            width: 9%;
+    }
+}
+@media only screen and (max-width: 160px) {
+    #Translate, [data-id="Translate"]{
+           display: none;
+    }
+    #Translate2{
+           width: 58%;
+    }
+    .clear, .history {
+            width: 9%;
+    }
+}
