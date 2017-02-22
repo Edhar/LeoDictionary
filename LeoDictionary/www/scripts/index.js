@@ -12,6 +12,7 @@
         //function onBackKeyDown() {
             
         //}
+
 /*
         setInterval(function () {
             var w = window,
@@ -21,8 +22,11 @@
             x = w.innerWidth || e.clientWidth || g.clientWidth,
             y = w.innerHeight || e.clientHeight || g.clientHeight;
 
-            document.getElementById("Translate2").value = x + "x" + y;
-        }, 300);*/
+            //document.getElementById("Translate2").value = x + "x" + y;
+            document.getElementById("Translate2").value = darkThemeModeActive();
+        }, 300);
+*/
+        
 
         // Handle the Cordova pause and resume events
         //document.addEventListener( 'pause', onPause.bind( this ), false );
@@ -144,7 +148,8 @@
         }
 
         function darkThemeModeActive() {
-            if (document.getElementById("DarkThemeCheckbox").checked) {
+            var darkTheme = localStorage.getItem("darkTheme");
+            if (darkTheme != undefined && darkTheme == "true") {
                 return true;
             }
             return false;
@@ -225,6 +230,7 @@
         }
 
         function ReadyRun() {
+            document.getElementById("DarkThemeCheckbox").checked = darkThemeModeActive();
             setTheme();
 
             function GetResultsFromHistory() {
@@ -358,7 +364,8 @@
                     document.getElementsByTagName("body")[0].className = " ";
                 }
                 var arrayLength = 0;
-                if (darkThemeModeActive()) {
+                if (document.getElementById("DarkThemeCheckbox").checked) {
+                    localStorage.setItem("darkTheme", true);
                     if (!document.getElementsByTagName("body")[0].className.match(/(?:^|\s)dark(?!\S)/)) {
                         document.getElementById("SearchForm").className += " dark";
                         document.getElementById("SearchResults").className += " dark";
@@ -380,6 +387,7 @@
                         }
                     }
                 } else {
+                    localStorage.setItem("darkTheme", false);
                     if (document.getElementsByTagName("body")[0].className.match(/(?:^|\s)dark(?!\S)/)) {
                         document.getElementById("SearchForm").className = document.getElementById("SearchForm").className.replace(/(?:^|\s)dark(?!\S)/g, '');
                         document.getElementById("SearchResults").className = document.getElementById("SearchResults").className.replace(/(?:^|\s)dark(?!\S)/g, '');
