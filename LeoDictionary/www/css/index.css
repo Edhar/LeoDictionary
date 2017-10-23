@@ -4,7 +4,7 @@
 }
 .clear, .history {
     height: 37px;
-    width: 7%;
+    width: 6.5%;
 }
 
 .translate {
@@ -96,7 +96,7 @@ input {
            width: 38%;
     }
     .clear, .history {
-            width: 7%;
+            width: 6.5%;
     }
 }
 
@@ -105,7 +105,7 @@ input {
            width: 36%;
     }
     .clear, .history {
-            width: 7%;
+            width: 6.5%;
     }
 }
 
@@ -114,7 +114,7 @@ input {
            width: 30%;
     }
     .clear, .history {
-            width: 7%;
+            width: 6.5%;
     }
 }
 
