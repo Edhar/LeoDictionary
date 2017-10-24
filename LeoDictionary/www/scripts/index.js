@@ -70,16 +70,17 @@
         var hoverClass = "hover";
         var exactClass = "exact";
 
-        function trimChar(string, charToRemove) {
-            while (string.charAt(0) == charToRemove) {
-                string = string.substring(1);
-            }
+        function trimChar(inputText, charToRemove) {
+            if (inputText && charToRemove && inputText != "" && charToRemove != "") {
+                while (inputText.charAt(0) == charToRemove) {
+                    inputText = inputText.substring(1);
+                }
 
-            while (string.charAt(string.length - 1) == charToRemove) {
-                string = string.substring(0, string.length - 1);
+                while (inputText.charAt(inputText.length - 1) == charToRemove) {
+                    inputText = inputText.substring(0, inputText.length - 1);
+                }
             }
-
-            return string;
+            return inputText;
         }
 
         function showHistoryForDays() {
@@ -220,7 +221,8 @@
                 for (var i = 0; i < wordContent.length; i++) {
                     if (wordContent[i] != "") {
                         var columns = trim(wordContent[i]).split(";");
-                        var newWord = new DictionaryWord(trimChar(columns[0], '"'), trimChar(columns[1], '"').split(";").join(",").split(".").join(",").split(",,").join(","), "[" + trimChar(columns[3], '"') + "]", trimChar(columns[5], '"'));
+                        var translation = trimChar(columns[1], '"');
+                        var newWord = new DictionaryWord(trimChar(columns[0], '"'), (translation != null ? translation.split(";").join(",").split(".").join(",").split(",,").join(",") : ""), "[" + trimChar(columns[3], '"') + "]", trimChar(columns[5], '"'));
                         allwords.push(newWord);
                     }
                 }
