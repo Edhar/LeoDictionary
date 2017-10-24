@@ -432,9 +432,7 @@
 
             var historyRawValueFocusOutLinterner = function (e) {
                 var newValue = document.getElementById("HistoryRawValue").value;
-                if (newValue && newValue > 0) {
-                    localStorage.setItem("history", newValue);
-                }
+                localStorage.setItem("history", newValue);
             };
             document.getElementById("HistoryRawValue").addEventListener("focusout", historyRawValueFocusOutLinterner);
 
