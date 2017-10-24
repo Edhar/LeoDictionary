@@ -426,8 +426,17 @@
             var ShowSettingsClickLinterner = function (e) {
                 document.getElementById("ShowSettings").focus();
                 document.getElementById("SettingsContainer").style.display = "block";
+                document.getElementById("HistoryRawValue").value = localStorage.getItem("history");
             };
             document.getElementById("ShowSettings").addEventListener("click", ShowSettingsClickLinterner);
+
+            var historyRawValueFocusOutLinterner = function (e) {
+                var newValue = document.getElementById("HistoryRawValue").value;
+                if (newValue && newValue > 0) {
+                    localStorage.setItem("history", newValue);
+                }
+            };
+            document.getElementById("HistoryRawValue").addEventListener("focusout", historyRawValueFocusOutLinterner);
 
 
             var saveHistoryForDaysFocusOutLinterner = function (e) {
