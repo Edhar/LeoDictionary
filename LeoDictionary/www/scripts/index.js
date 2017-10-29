@@ -255,24 +255,25 @@
                         history = history.split('|||');
 
                         var now = new Date();
-                        var result = "";
                         for (var i = 0; i < history.length; i++) {
                             if (history[i]) {
                                 var historyRow = history[i].split('===');
                                 if (historyRow.length == 2) {
                                     var word = historyRow[0];
-                                    if (word.indexOf("[") != -1) {
-                                        word = word.substring(0, word.indexOf("["));
-                                    }
-                                    var date = new Date(historyRow[1]);
-                                    date.setTime(date.getTime() + showHistoryForDays() * 86400000);
-                                    var date2 = new Date(historyRow[1]);
-                                    date2.setTime(date2.getTime() + saveHistoryForDays() * 86400000);
-                                    if (date >= now) {
-                                        historyEnWordsArray.push(new DictionaryWord(word, historyRow[1], ""));
-                                    }
-                                    if (date2 >= now) {
-                                        historyNew = historyNew + "|||" + word + "===" + historyRow[1];
+                                    if (word != null && word != "") {
+                                        if (word.indexOf("[") != -1) {
+                                            word = word.substring(0, word.indexOf("["));
+                                        }
+                                        var date = new Date(historyRow[1]);
+                                        date.setTime(date.getTime() + showHistoryForDays() * 86400000);
+                                        var date2 = new Date(historyRow[1]);
+                                        date2.setTime(date2.getTime() + saveHistoryForDays() * 86400000);
+                                        if (date >= now) {
+                                            historyEnWordsArray.push(new DictionaryWord(word, historyRow[1], ""));
+                                        }
+                                        if (date2 >= now) {
+                                            historyNew = historyNew + "|||" + word + "===" + historyRow[1];
+                                        }
                                     }
                                 }
                             }
@@ -280,7 +281,7 @@
                         localStorage.setItem("history", historyNew);
 
                         ///=======removing duplicates
-                        historyEnWordsArray = historyEnWordsArray.sortBy(function (o) { return o.word });
+                        historyEnWordsArray = historyEnWordsArray.sortBy(function (o) { return o.word + new Date(o.translation).toISOString() });
                         // delete all duplicates from the array
                         for (var i = 0; i < historyEnWordsArray.length - 1; i++) {
                             if (historyEnWordsArray[i].word == historyEnWordsArray[i + 1].word) {
@@ -312,14 +313,15 @@
                             text = enText;
                         }
 
-                        var history = localStorage.getItem("history");
-                        if (!history) {
-                            history = "";
+                        if (text != null && text != "") {
+                            var history = localStorage.getItem("history");
+                            if (!history) {
+                                history = "";
+                            }
+                            history = history + "|||" + text + "===" + new Date().toUTCString();
+
+                            localStorage.setItem("history", history);
                         }
-                        history = history + "|||" + text + "===" + new Date().toUTCString();
-
-                        localStorage.setItem("history", history);
-
                     }
                     catch (err) {
 
@@ -491,14 +493,14 @@
 
 
             function TranslateChange(e) {
-                var translate2Input = document.getElementById("Translate2");
+                var translateInput = document.getElementById("Translate");
 
                 if (e.type == "keypress") {
-                    if (isTextSelected(translate2Input)) {
+                    if (isTextSelected(translateInput)) {
                         pushResultToHistory();
                     }
                 } else {
-                    var word = translate2Input.value;
+                    var word = translateInput.value;
                     var pasteMode = false;
                     if (e.type == "paste" && e.clipboardData) {
                         word = e.clipboardData.getData('Text');
