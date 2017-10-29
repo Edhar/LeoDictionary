@@ -70,6 +70,16 @@
         var hoverClass = "hover";
         var exactClass = "exact";
 
+        function isTextSelected(input) {
+            if (typeof input.selectionStart == "number") {
+                return input.selectionStart == 0 && input.selectionEnd == input.value.length;
+            } else if (typeof document.selection != "undefined") {
+                input.focus();
+                return document.selection.createRange().text == input.value;
+            }
+        }
+
+
         function trimChar(inputText, charToRemove) {
             if (inputText && charToRemove && inputText != "" && charToRemove != "") {
                 while (inputText.charAt(0) == charToRemove) {
@@ -298,7 +308,7 @@
                     try {
                         var text = word;
                         if (word == null) {
-                            var enText = document.querySelector("#SearchResults tr > td.transcription").innerText
+                            var enText = document.querySelector("#SearchResults tr > td.transcription").innerText;
                             text = enText;
                         }
 
@@ -481,40 +491,59 @@
 
 
             function TranslateChange(e) {
-                var word = document.getElementById("Translate").value;
-                var pasteMode = false;
-                if (e.type == "paste" && e.clipboardData) {
-                    word = e.clipboardData.getData('Text');
-                    pasteMode = true;
-                }
-                if (getTranslations(word, true, false)) {
-                    document.getElementById("Translate2").value = '';
-                    document.getElementById("Translate").focus();
-                    if (pasteMode) {
+                var translate2Input = document.getElementById("Translate2");
+
+                if (e.type == "keypress") {
+                    if (isTextSelected(translate2Input)) {
                         pushResultToHistory();
+                    }
+                } else {
+                    var word = translate2Input.value;
+                    var pasteMode = false;
+                    if (e.type == "paste" && e.clipboardData) {
+                        word = e.clipboardData.getData('Text');
+                        pasteMode = true;
+                    }
+                    if (getTranslations(word, true, false)) {
+                        document.getElementById("Translate2").value = '';
+                        document.getElementById("Translate").focus();
+                        if (pasteMode) {
+                            pushResultToHistory();
+                        }
                     }
                 }
             }
             document.getElementById("Translate").addEventListener('paste', TranslateChange);
             document.getElementById("Translate").addEventListener('keyup', TranslateChange);
+            document.getElementById("Translate").addEventListener('keypress', TranslateChange);
 
             function Translate2Change(e) {
-                var word = document.getElementById("Translate2").value;
-                var pasteMode = false;
-                if (e.type == "paste" && e.clipboardData) {
-                    word = e.clipboardData.getData('Text');
-                    pasteMode = true;
-                }
-                if (getTranslations(word, false, false)) {
-                    document.getElementById("Translate").value = '';
-                    document.getElementById("Translate2").focus();
-                    if (pasteMode) {
+                var translate2Input = document.getElementById("Translate2");
+
+                if (e.type == "keypress") {
+                    if (isTextSelected(translate2Input)) {
                         pushResultToHistory();
+                    }
+                } else {
+                    var word = translate2Input.value;
+                    var pasteMode = false;
+                    if (e.type == "paste" && e.clipboardData) {
+                        word = e.clipboardData.getData('Text');
+                        pasteMode = true;
+                    }
+                    if (getTranslations(word, false, false)) {
+                        document.getElementById("Translate").value = '';
+                        document.getElementById("Translate2").focus();
+                        if (pasteMode) {
+                            pushResultToHistory();
+                        }
                     }
                 }
             }
             document.getElementById("Translate2").addEventListener('paste', Translate2Change);
             document.getElementById("Translate2").addEventListener('keyup', Translate2Change);
+            document.getElementById("Translate2").addEventListener('keypress', Translate2Change);
+
 
             loadAllWords();
 
@@ -526,7 +555,11 @@
                     document.getElementById("ShowHistory").style.color = "";
                 }
                 word = trim(word);
-                if ((word != '' && word.length > 1) || historyMode) {
+                var wordMode = (word != '' && word.length > 1);
+                if (!historyMode && !wordMode) {
+                    historyMode = true;
+                }
+                if (wordMode || historyMode) {
                     word = word.toLowerCase();
                     var english = /^[A-Za-z0-9 -]*$/;
                     var isEnglish = false;
@@ -679,6 +712,7 @@
                     return true;
                 }
 
+                document.getElementById("SearchResults").innerHTML = "<tbody></tbody>";
                 return false;
             };
 
