@@ -559,6 +559,7 @@
                 word = trim(word);
                 var wordMode = (word != '' && word.length > 1);
                 if (!historyMode && !wordMode) {
+                    document.getElementById("ShowHistory").style.color = "Red";
                     historyMode = true;
                 }
                 if (wordMode || historyMode) {
