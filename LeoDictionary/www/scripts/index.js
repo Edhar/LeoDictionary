@@ -158,6 +158,14 @@
             return false;
         }
 
+        function translationUnderWordModeActive() {
+            var translationUnderWord = localStorage.getItem("translationUnderWord");
+            if (translationUnderWord != undefined && translationUnderWord == "true") {
+                return true;
+            }
+            return false;
+        }
+
         function darkThemeModeActive() {
             var darkTheme = localStorage.getItem("darkTheme");
             if (darkTheme != undefined && darkTheme == "true") {
@@ -243,6 +251,7 @@
 
         function ReadyRun() {
             document.getElementById("DarkThemeCheckbox").checked = darkThemeModeActive();
+            document.getElementById("TranslationUnderWord").checked = translationUnderWordModeActive();
             setTheme();
 
             function GetResultsFromHistory() {
@@ -429,6 +438,11 @@
             };
             document.getElementById("DarkThemeCheckbox").addEventListener("click", darkThemeCheckboxClickLinterner);
 
+            var translationUnderWordCheckboxClickLinterner = function (e) {
+                localStorage.setItem("translationUnderWord", true);
+            };
+            document.getElementById("TranslationUnderWord").addEventListener("click", translationUnderWordCheckboxClickLinterner);
+
             var settingsContainerCloseClickLinterner = function (e) {
                 if (historyModeActive()) {
                     getTranslations("", true, true);
@@ -491,6 +505,14 @@
                 });
             }
 
+            function TranslateClick(e) {
+                var input = this;
+                if (isTextSelected(input)) {
+                    input.selectionStart = input.selectionEnd;
+                } else {
+                    input.select();
+                }
+            }
 
             function TranslateChange(e) {
                 var translateInput = document.getElementById("Translate");
@@ -518,6 +540,7 @@
             document.getElementById("Translate").addEventListener('paste', TranslateChange);
             document.getElementById("Translate").addEventListener('keyup', TranslateChange);
             document.getElementById("Translate").addEventListener('keypress', TranslateChange);
+            document.getElementById("Translate").addEventListener('click', TranslateClick);
 
             function Translate2Change(e) {
                 var translate2Input = document.getElementById("Translate2");
@@ -545,6 +568,7 @@
             document.getElementById("Translate2").addEventListener('paste', Translate2Change);
             document.getElementById("Translate2").addEventListener('keyup', Translate2Change);
             document.getElementById("Translate2").addEventListener('keypress', Translate2Change);
+            document.getElementById("Translate2").addEventListener('click', TranslateClick);
 
 
             loadAllWords();
@@ -618,10 +642,7 @@
                     var tempDate = new Date();
                     var prevDate = new Date(tempDate.getFullYear() - 1, tempDate.getMonth(), tempDate.getDate());//,tempDate.getHours(),tempDate.getMinutes());
 
-                    var translationUnderWord = false;
-                    if (document.getElementById("TranslationUnderWord").checked) {
-                        translationUnderWord = true;
-                    }
+                    var translationUnderWord = translationUnderWordModeActive();
 
                     for (var i = 0; i < wordTranslations.length; i++) {
                         dictWord = wordTranslations[i];
