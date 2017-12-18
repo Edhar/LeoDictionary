@@ -373,7 +373,9 @@
             var showHistoryClickLinterner = function (e) {
                 document.getElementById("ShowHistory").focus();
                 pushResultToHistory();
-                getTranslations("", true, true);
+                document.getElementById("Translate").value = '';
+                document.getElementById("Translate2").value = '';
+                getTranslations("", false, true);
             };
             document.getElementById("ShowHistory").addEventListener("click", showHistoryClickLinterner);
 
